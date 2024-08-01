@@ -44,7 +44,7 @@ public class PlanCategory {
 	private String updatedBy;
 	
 	@Column(name="ACTIVE_SW",length=50)
-	private String activeSW;
+	private String activeSW="active";
 
 	public Integer getCategoryId() {
 		return categoryId;

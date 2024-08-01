@@ -3,6 +3,8 @@ package com.infosys.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.infosys.entity.TravelPlan;
 
 public interface ITravelPlanMgmtService {

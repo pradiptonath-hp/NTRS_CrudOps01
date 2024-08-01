@@ -50,7 +50,7 @@ public class TravelPlan {
 	private String updatedBy;
 	
 	@Column(name="ACTIVE_SW",length=20)
-	private String activateSW;
+	private String activateSW="active";
 
 	public Integer getPlanId() {
 		return planId;
@@ -155,9 +155,9 @@ public class TravelPlan {
 				+ createdDate + ", updatedDate=" + updatedDate + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy
 				+ ", activateSW=" + activateSW + "]";
 	}
-	
-	
-	
-	
-	
+
+	public TravelPlan() {
+		super();
+		// TODO Auto-generated constructor stub
+	}	
 }

@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.infosys.entity.PlanCategory;
 import com.infosys.entity.TravelPlan;
 import com.infosys.repository.IPlanCategoryRepository;
 import com.infosys.repository.ITravelPlanRepository;
 
+@Service
 public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 	@Autowired
 	private ITravelPlanRepository travelPlanRepo;
