@@ -13,6 +13,7 @@ import com.infosys.repository.ITravelPlanRepository;
 
 @Service
 public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
+	
 	@Autowired
 	private ITravelPlanRepository travelPlanRepo;
 	@Autowired
