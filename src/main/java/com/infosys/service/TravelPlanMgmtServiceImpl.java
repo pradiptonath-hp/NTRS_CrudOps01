@@ -6,6 +6,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.infosys.commons.AppConfigProperties;
 import com.infosys.entity.PlanCategory;
 import com.infosys.entity.TravelPlan;
 import com.infosys.repository.IPlanCategoryRepository;
@@ -19,6 +20,14 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 	@Autowired
 	private IPlanCategoryRepository planCategoryRepo;
 	
+	private Map<String,String> messages;
+	
+	@Autowired
+	public TravelPlanMgmtServiceImpl(AppConfigProperties props) {
+		messages = props.getMessages();
+		//System.out.println("messages::"+messages);
+	}
+	
 	@Override
 	public String registerTravelPlan(TravelPlan travelPlan) {
 		// TODO save the object
@@ -28,9 +37,9 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 		else
 			return "Problem in saving the TravelPlan";*/
 		
-		return saved.getPlanId()!=null?"Travel Plan is saved with id value ::"+saved.getPlanId():"Problem in saving the TravelPlan";
+		return saved.getPlanId()!=null?messages.get("save-success")+saved.getPlanId():messages.get("save-failure");
 	}
-
+	
 	@Override
 	public Map<Integer, String> getTravelPlanCategories() {
 		// TODO Get All travel Plan categories
@@ -41,14 +50,14 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 		});
 		return categoriesMap;
 	}
-
+	
 	@Override
 	public List<TravelPlan> showAllTravelPlans() {
 		// TODO Auto-generated method stub
 		
 		return travelPlanRepo.findAll();
 	}
-
+	
 	@Override
 	public TravelPlan showTravelPlanById(Integer planId) {
 		// TODO Auto-generated method stub
@@ -60,7 +69,7 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 			throw new IllegalArgumentException("plan id not found");
 		}*/
 		
-		return travelPlanRepo.findById(planId).orElseThrow(()-> new IllegalArgumentException("TravelPlan is not found"));
+		return travelPlanRepo.findById(planId).orElseThrow(()-> new IllegalArgumentException(messages.get("find-by-id-failure")));
 	}
 
 	@Override
@@ -72,26 +81,26 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 		Optional<TravelPlan> opt  = travelPlanRepo.findById(plan.getPlanId());
 		if(opt.isPresent()) {
 			travelPlanRepo.save(plan);
-			return plan.getPlanId()+"is updated";
+			return plan.getPlanId()+messages.get("update-success");
 		}
 		else {
-			return plan.getPlanId()+"Travel Plan is not found";
+			return plan.getPlanId()+messages.get("update-failure");
 		}
 	}
-
+	
 	@Override
 	public String deleteTravelPlan(Integer planId) {
 		// TODO Auto-generated method stub
 		Optional<TravelPlan> opt  = travelPlanRepo.findById(planId);
 		if(opt.isPresent()) {
 			travelPlanRepo.deleteById(planId);
-			return planId+"Travel Plan is deleted";
+			return planId+messages.get("delete-success");
 		}
 		else {
-			return planId+"Travel Plan is not found";
+			return planId+messages.get("delete-failure");
 		}
 	}
-
+	
 	@Override
 	public String changeTravelPlanStatus(Integer planId, String status) {
 		// TODO Auto-generated method stub
@@ -102,10 +111,10 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 			TravelPlan plan =opt.get();
 			plan.setActivateSW(status);
 			travelPlanRepo.save(plan);
-			return planId+"Travel Plan Status is Changed!";
+			return planId+messages.get("status-change-success");
 		}
 		else {
-			return planId+"Travel Plan is not found for updation";
+			return planId+messages.get("status-change-failure");
 		}
 	}
 

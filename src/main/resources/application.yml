@@ -13,3 +13,16 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+plan:
+ module:
+  messages:
+   save-success: Travel Plan is saved with id value
+   save-failure: Travel Plan is not saved with value
+   find-by-id-failure: TravelPlan is not found
+   update-success: Travel Plan is updated
+   update-failure: Travel Plamn is not found for updation
+   delete-success: Travel Plan is deleted
+   delete-failure: Travel Plan is not found for deletion
+   status-change-success: Travel Plan status is changed
+   status-change-failure: Travel Plan is not found for status changes
+   
