@@ -11,6 +11,7 @@ import com.infosys.entity.PlanCategory;
 import com.infosys.entity.TravelPlan;
 import com.infosys.repository.IPlanCategoryRepository;
 import com.infosys.repository.ITravelPlanRepository;
+import com.infosys.AppConstants.TravelPlanConstants;
 
 @Service
 public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
@@ -37,7 +38,7 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 		else
 			return "Problem in saving the TravelPlan";*/
 		
-		return saved.getPlanId()!=null?messages.get("save-success")+saved.getPlanId():messages.get("save-failure");
+		return saved.getPlanId()!=null?messages.get(TravelPlanConstants.SAVE_SUCCESS)+saved.getPlanId():messages.get(TravelPlanConstants.SAVE_FAILURE);
 	}
 	
 	@Override
@@ -69,7 +70,7 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 			throw new IllegalArgumentException("plan id not found");
 		}*/
 		
-		return travelPlanRepo.findById(planId).orElseThrow(()-> new IllegalArgumentException(messages.get("find-by-id-failure")));
+		return travelPlanRepo.findById(planId).orElseThrow(()-> new IllegalArgumentException(messages.get(TravelPlanConstants.FIND_BY_ID_FAILURE)));
 	}
 
 	@Override
@@ -81,10 +82,10 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 		Optional<TravelPlan> opt  = travelPlanRepo.findById(plan.getPlanId());
 		if(opt.isPresent()) {
 			travelPlanRepo.save(plan);
-			return plan.getPlanId()+messages.get("update-success");
+			return plan.getPlanId()+messages.get(TravelPlanConstants.UPDATE_SUCCESS);
 		}
 		else {
-			return plan.getPlanId()+messages.get("update-failure");
+			return plan.getPlanId()+messages.get(TravelPlanConstants.UPDATE_FAILURE);
 		}
 	}
 	
@@ -94,10 +95,10 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 		Optional<TravelPlan> opt  = travelPlanRepo.findById(planId);
 		if(opt.isPresent()) {
 			travelPlanRepo.deleteById(planId);
-			return planId+messages.get("delete-success");
+			return planId+messages.get(TravelPlanConstants.DELETE_SUCCESS);
 		}
 		else {
-			return planId+messages.get("delete-failure");
+			return planId+messages.get(TravelPlanConstants.DELETE_FAILURE);
 		}
 	}
 	
@@ -111,10 +112,10 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
 			TravelPlan plan =opt.get();
 			plan.setActivateSW(status);
 			travelPlanRepo.save(plan);
-			return planId+messages.get("status-change-success");
+			return planId+messages.get(TravelPlanConstants.STATUS_CHANGE_SUCCESS);
 		}
 		else {
-			return planId+messages.get("status-change-failure");
+			return planId+messages.get(TravelPlanConstants.STATUS_CHANGE_FAILURE);
 		}
 	}
 
