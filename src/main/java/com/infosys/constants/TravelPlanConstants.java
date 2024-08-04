@@ -1,4 +1,4 @@
-package com.infosys.AppConstants;
+package com.infosys.constants;
 
 public class TravelPlanConstants {
 

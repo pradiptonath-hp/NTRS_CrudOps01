@@ -11,7 +11,7 @@ import com.infosys.entity.PlanCategory;
 import com.infosys.entity.TravelPlan;
 import com.infosys.repository.IPlanCategoryRepository;
 import com.infosys.repository.ITravelPlanRepository;
-import com.infosys.AppConstants.TravelPlanConstants;
+import com.infosys.constants.TravelPlanConstants;
 
 @Service
 public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
